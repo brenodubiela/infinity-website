@@ -1,0 +1,569 @@
+@import "tailwindcss";
+
+/* Tokens do DESIGN.md. Defaults do Tailwind desligados para proibir valores fora da marca. */
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-canvas: #ffffff;
+  --color-ink: #1b2430;
+  --color-ink-soft: #3f4b58;
+  --color-muted: #5a636e;
+  --color-graphic: #8a9199;
+  --color-silver: #c7cdd4;
+  --color-signature-line: #cfd5db;
+  --color-border: #e6e8eb;
+  --color-surface-muted: #f4f5f7;
+  --color-highlight: #fcf6f6;
+  --color-primary: #c8102e;
+  --color-primary-hover: #a00d25;
+  --color-primary-on-dark: #e24b4a;
+  --color-surface-dark: #1b2430;
+  --color-surface-deep: #12181f;
+  --color-border-dark: #2c3742;
+  --color-on-dark: #ffffff;
+  --color-on-dark-muted: #a8b1ba;
+
+  --spacing: 8px;
+
+  --text-*: initial;
+  --text-xs: 12px;
+  --text-xs--line-height: 16px;
+  --text-sm: 14px;
+  --text-sm--line-height: 24px;
+  --text-base: 16px;
+  --text-base--line-height: 24px;
+  --text-lg: 20px;
+  --text-lg--line-height: 32px;
+  --text-xl: 24px;
+  --text-xl--line-height: 32px;
+  --text-xl--letter-spacing: -0.005em;
+  --text-2xl: 32px;
+  --text-2xl--line-height: 40px;
+  --text-2xl--letter-spacing: -0.01em;
+  --text-3xl: 40px;
+  --text-3xl--line-height: 48px;
+  --text-3xl--letter-spacing: -0.015em;
+  --text-4xl: 48px;
+  --text-4xl--line-height: 56px;
+  --text-4xl--letter-spacing: -0.02em;
+  --text-hero: 64px;
+  --text-hero--line-height: 72px;
+  --text-hero--letter-spacing: -0.025em;
+  --text-label: 12px;
+  --text-label--line-height: 16px;
+  --text-label--letter-spacing: 0.12em;
+
+  --font-weight-*: initial;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  --radius-*: initial;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  --shadow-*: initial;
+  --shadow-overlay: 0 8px 24px rgb(27 36 48 / 0.12);
+
+  --container-site: 1280px;
+  --container-text: 72ch;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-fade-up: fade-up 800ms var(--ease-out-expo) both;
+  --animate-fade-in: fade-in 800ms var(--ease-out-expo) both;
+  --animate-rise: rise 900ms var(--ease-out-expo) both;
+  --animate-draw: draw 2400ms var(--ease-out-expo) both;
+  --animate-marquee: marquee 56s linear infinite;
+  --animate-ping-soft: ping-soft 2400ms var(--ease-out-expo) infinite;
+  --animate-blink: blink 1600ms steps(2, start) infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes hero-zoom {
+    from {
+      transform: scale(1.06);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  @keyframes rise {
+    from {
+      transform: translateY(24px);
+    }
+    to {
+      transform: none;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes ping-soft {
+    0% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    80%,
+    100% {
+      transform: scale(3);
+      opacity: 0;
+    }
+  }
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-plex-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-plex-mono), "Courier New", monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+    font-feature-settings: "kern", "liga";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  [data-tone="dark"] :focus-visible {
+    outline-color: var(--color-primary-on-dark);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    ::before,
+    ::after {
+      animation-duration: 1ms !important;
+      animation-delay: 0ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 1ms !important;
+    }
+  }
+}
+
+/* Entrada em cascata: <Reveal> no servidor + <RevealObserver> único no layout. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--reveal-y, 16px));
+  transition:
+    opacity 700ms var(--ease-out-expo) var(--reveal-delay, 0s),
+    transform 700ms var(--ease-out-expo) var(--reveal-delay, 0s);
+}
+
+[data-reveal][data-shown] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    transform: none;
+  }
+}
+
+/* Linhas finas da malha técnica (8 px x 8). Padrão de linhas, não degradê visual. */
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-color, var(--color-border)) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color, var(--color-border)) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@utility bg-grid-dark {
+  --grid-color: rgb(255 255 255 / 0.05);
+  background-image:
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Traço que se desenha: use pathLength="1" no SVG. */
+@utility draw-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+/* Barra de progresso de leitura, só onde há scroll-driven animations. */
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: grow-x linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Transição entre páginas (React ViewTransition). */
+::view-transition-old(.page-fade) {
+  animation: 160ms ease-in both vt-fade reverse;
+}
+::view-transition-new(.page-fade) {
+  animation: 320ms var(--ease-out-expo) 120ms both vt-rise;
+}
+::view-transition {
+  pointer-events: none;
+}
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+@keyframes vt-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes vt-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
+@keyframes pulse-node {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+@keyframes travel-left {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
+/* Loader de entrada (carga completa da página). Script inline marca html[data-loader]. */
+.site-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background-color: var(--color-surface-dark);
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+  transition:
+    transform 800ms var(--ease-out-expo) 80ms,
+    visibility 0s linear 900ms;
+  animation: loader-failsafe 1ms linear 4500ms forwards;
+}
+
+.site-loader__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  transition:
+    opacity 400ms ease,
+    transform 600ms var(--ease-out-expo);
+}
+
+.site-loader__mark {
+  width: 280px;
+  height: auto;
+  overflow: visible;
+}
+
+.site-loader__symbol {
+  fill: none;
+  stroke: var(--color-white);
+  stroke-width: 8;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 900ms var(--ease-out-expo) 100ms forwards;
+}
+
+.site-loader__divider {
+  stroke: var(--color-muted);
+  stroke-width: 1;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scaleY(0);
+  animation: loader-grow-y 450ms var(--ease-out-expo) 600ms forwards;
+}
+
+.site-loader__name,
+.site-loader__sub {
+  opacity: 0;
+  animation: loader-text-in 700ms var(--ease-out-expo) forwards;
+}
+
+.site-loader__name {
+  fill: var(--color-white);
+  animation-delay: 650ms;
+}
+
+.site-loader__sub {
+  fill: var(--color-silver);
+  animation-delay: 780ms;
+}
+
+.site-loader__track {
+  position: relative;
+  width: 280px;
+  height: 2px;
+  overflow: hidden;
+  background: rgb(255 255 255 / 0.1);
+}
+
+.site-loader__bar {
+  position: absolute;
+  inset: 0;
+  background: var(--color-primary-on-dark);
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: loader-progress 1100ms cubic-bezier(0.65, 0, 0.35, 1) 80ms forwards;
+}
+
+html[data-loader="active"] {
+  overflow: hidden;
+}
+
+html[data-loader="active"] main > :first-child,
+html[data-loader="active"] main > :first-child * {
+  animation-play-state: paused !important;
+}
+
+html[data-loader="done"] .site-loader {
+  transform: translateY(-100%);
+  visibility: hidden;
+}
+
+html[data-loader="done"] .site-loader__inner {
+  opacity: 0;
+  transform: translateY(-24px);
+}
+
+@keyframes loader-grow-y {
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes loader-text-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes loader-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes loader-failsafe {
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-loader__symbol {
+    stroke-dashoffset: 0;
+  }
+  .site-loader__divider {
+    transform: none;
+  }
+  .site-loader__name,
+  .site-loader__sub {
+    opacity: 1;
+  }
+  html[data-loader="done"] .site-loader {
+    transform: none;
+    opacity: 0;
+    transition: opacity 300ms ease, visibility 0s linear 300ms;
+  }
+}
+
+/* Cortina de transição entre páginas (navegação interna). */
+.route-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  background-color: var(--color-surface-dark);
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+  border-top: 2px solid var(--color-primary-on-dark);
+  transform: translateY(100%);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.route-curtain[data-phase="cover"],
+.route-curtain[data-phase="hold"] {
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+  transition: transform 450ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.route-curtain[data-phase="reveal"] {
+  visibility: visible;
+  transform: translateY(-100%);
+  transition: transform 650ms var(--ease-out-expo);
+}
+
+.route-curtain__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.route-curtain__symbol {
+  width: 120px;
+  height: auto;
+  overflow: visible;
+}
+
+.route-curtain__symbol path {
+  fill: none;
+  stroke: var(--color-white);
+  stroke-width: 8;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 750ms var(--ease-out-expo) 120ms forwards;
+}
+
+.route-curtain__bar {
+  display: block;
+  width: 120px;
+  height: 2px;
+  background: var(--color-primary-on-dark);
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: loader-progress 900ms cubic-bezier(0.65, 0, 0.35, 1) 80ms forwards;
+}
+
+.route-curtain[data-phase="reveal"] .route-curtain__inner {
+  opacity: 0;
+  transform: translateY(-24px);
+  transition:
+    opacity 300ms ease,
+    transform 500ms var(--ease-out-expo);
+}
+
+html[data-route="busy"] main > :first-child,
+html[data-route="busy"] main > :first-child * {
+  animation-play-state: paused !important;
+}
+
+/* Banner de cookies: vem no HTML estático; some antes da primeira pintura para quem já escolheu. */
+html[data-consent] .cookie-banner {
+  display: none;
+}
+
+@keyframes cookie-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+

@@ -1,0 +1,47 @@
+# Único .gitignore do projeto (raiz). Padrões sem barra inicial valem para qualquer pasta.
+
+# dependências
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# next.js / build
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# vercel
+.vercel
+
+# variáveis de ambiente (o .env.example é versionado)
+.env*
+!.env.example
+
+# logs e caches
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+*.log
+.cache/
+.eslintcache
+coverage/
+
+# sistema e editores
+.DS_Store
+Thumbs.db
+*.pem
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+
+# ferramentas locais do Claude Code (configuração de preview)
+.claude/
